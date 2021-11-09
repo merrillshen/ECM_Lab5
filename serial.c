@@ -45,7 +45,10 @@ void sendStringSerial4(char *string){
     frac_part = (ADC_val*100)/77 - int_part*100;
     sprintf(string,"%d.%02dV ",int_part,frac_part);
     for (i = 0; i < 6; i++) {sendCharSerial4(string[i]);} 
-    __delay_ms(100);
+    LCD_sendstring(string); 
+    __delay_ms(150);
+    LCD_sendbyte(0b00000001,0);
+    __delay_ms(2);
     }
     
     
