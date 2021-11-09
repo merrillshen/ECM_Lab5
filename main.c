@@ -9,18 +9,19 @@
 #include <stdio.h>
 #include "serial.h"
 #include "LCD.h"
+#include "ADC.h"
+
 
 #define _XTAL_FREQ 64000000 //note intrinsic _delay function is 62.5ns at 64,000,000Hz  
 
 void main(void) {
     LCD_Init();
     initUSART4(); 
+    ADC_init();
 
-    char temp;
+    char buf[10];
     while (1) {
-        temp = getCharSerial4();
-        LCD_sendbyte(temp,1);
-        sendCharSerial4(temp);
+        sendStringSerial4(buf);
     }
 }
 

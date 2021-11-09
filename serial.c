@@ -1,5 +1,7 @@
 #include <xc.h>
 #include "serial.h"
+#include "ADC.h"
+#include "LCD.h"
 
 void initUSART4(void) {
 
@@ -35,7 +37,19 @@ void sendCharSerial4(char charToSend) {
 //function to send a string over the serial interface
 void sendStringSerial4(char *string){
 	//Hint: look at how you did this for the LCD lab 
-}
+    unsigned int ADC_val = ADC_getval();
+    int int_part;
+    int frac_part;
+    int i;
+    int_part = ADC_val/77; // i.e. 255 / 5V = 77.2727
+    frac_part = (ADC_val*100)/77 - int_part*100;
+    sprintf(string,"%d.%02dV ",int_part,frac_part);
+    for (i = 0; i < 6; i++) {sendCharSerial4(string[i]);} 
+    __delay_ms(100);
+    }
+    
+    
+//}
 
 
 //functions below are for Ex3 and 4 (optional)
