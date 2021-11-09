@@ -16,8 +16,11 @@ void main(void) {
     LCD_Init();
     initUSART4(); 
 
+    char temp;
     while (1) {
-        LCD_sendbyte(getCharSerial4(),1);
+        temp = getCharSerial4();
+        LCD_sendbyte(temp,1);
+        sendCharSerial4(temp);
     }
 }
 
