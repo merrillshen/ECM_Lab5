@@ -51,9 +51,6 @@ void sendStringSerial4(char *string){
     __delay_ms(2);
     }
     
-    
-//}
-
 
 //functions below are for Ex3 and 4 (optional)
 
@@ -76,6 +73,8 @@ void putCharToRxBuf(char byte){
 char isDataInRxBuf (void){
     return (RxBufWriteCnt!=RxBufReadCnt);
 }
+
+
 
 // circular buffer functions for TX
 // retrieve a byte from the buffer
@@ -100,6 +99,8 @@ char isDataInTxBuf (void){
 //add a string to the buffer
 void TxBufferedString(char *string){
 	//Hint: look at how you did this for the LCD lab 
+    while(*string != 0){   
+		putCharToTxBuf(*string++);}
 }
 
 //initialise interrupt driven transmission of the Tx buf
