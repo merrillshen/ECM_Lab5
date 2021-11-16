@@ -26,8 +26,8 @@ void __interrupt(high_priority) HighISR()
     if (PIR4bits.RC4IF == 1){ 
         putCharToRxBuf(RC4REG);
     }
-    if (PIR4bits.TX4IF  == 1){ // TX4REG is empty
-        if (isDataInTxBuf()==1) {TX4REG = getCharFromTxBuf();} // Set next char 
+    if (PIR4bits.TX4IF  == 1 && PIE4bits.TX4IE==1){ // TX4REG is empty
+        if (isDataInTxBuf()==1 ) {TX4REG = getCharFromTxBuf();} // Set next char 
         else {PIE4bits.TX4IE=0;}
     }
 }
